@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { Sidebar } from '@/components/sidebar'
 
-export default async function InboxLayout({
+export default async function LayoutAutenticado({
   children,
 }: {
   children: React.ReactNode

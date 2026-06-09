@@ -23,7 +23,7 @@ export default async function InboxPage() {
         <ListaConversas conversas={(conversas as Conversation[]) ?? []} />
       </div>
       <div className="flex flex-1 items-center justify-center text-gray-400">
-        <p className="text-sm">Selecione uma conversa</p>
+        <p className="text-sm">Selecione uma conversa para começar</p>
       </div>
     </div>
   )
