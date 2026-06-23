@@ -194,7 +194,7 @@
 
   <div class="toolbar">
     <button class="gold" id="btnMC">▶ Rodar Monte Carlo (2000×)</button>
-    <button class="ghost" id="btnSample">Carregar resultados de exemplo (J1)</button>
+    <button class="ghost" id="btnSample">↻ Recarregar resultados reais (J1–J2)</button>
     <button class="ghost" id="btnExport">⬇ Exportar .json</button>
     <button class="ghost" id="btnImport">⬆ Importar .json</button>
     <button class="danger" id="btnReset">↺ Limpar tudo</button>
@@ -215,7 +215,7 @@
       <li><span class="v-ap">APROXIMAÇÃO</span> — <b>Datas por jogo</b>: as datas de J1 e J3 e de cada rodada eliminatória estão verificadas; a data de J2 de cada grupo foi interpolada dentro da janela oficial. A divisão exata de cada rodada em dois dias pode variar por jogo.</li>
       <li><span class="v-ap">APROXIMAÇÃO</span> — <b>Sedes por jogo</b>: as sedes das eliminatórias estão em grande parte confirmadas; a sede atribuída a cada jogo de grupo é representativa do cluster regional do grupo e deve ser confirmada jogo a jogo.</li>
       <li><span class="v-ap">APROXIMAÇÃO</span> — <b>Forças (0–100)</b> derivadas do ranking FIFA (jun/2026: Argentina, Espanha, França, Inglaterra, Portugal no topo) + qualidade de elenco. São estimativas calibradas, não números oficiais.</li>
-      <li><span class="v-ap">APROXIMAÇÃO</span> — <b>Resultados de exemplo (J1)</b>: o botão carrega placares de J1 que apareceram em buscas; trate-os como rascunho a confirmar e edite com os placares reais (salvam automaticamente).</li>
+      <li><span class="v-ap">VERIFICAR</span> — <b>Resultados pré-carregados (J1 completa + J2 dos grupos A–J, até 23/jun/2026)</b>: extraídos de resumos de busca (ESPN, NBC, Yahoo, Sky, CBS). São consistentes com os emparelhamentos oficiais por rodada, mas <b>podem conter erros</b> — confirme contra a FIFA/ESPN e corrija direto nos campos (salva automaticamente). Os Grupos K e L jogam a J2 em 23/jun, por isso ficam em branco.</li>
     </ul>
     <details style="margin-top:8px"><summary>Fontes consultadas</summary>
       <p class="muted">FIFA.com (final draw / knockout bracket / standings), Wikipedia "2026 FIFA World Cup" e "…knockout stage", ESPN, Sky Sports, NBC Sports, FIFA/Coca-Cola Men's World Ranking. Páginas oficiais bloquearam a busca direta; os dados foram reconstruídos e checados por consistência cruzada entre múltiplas fontes.</p>
@@ -375,16 +375,34 @@ const THIRD_SLOTS = [
   {m:87,gs:["D","E","I","J","L"]}
 ];
 
-// Resultados de exemplo J1 (rascunho — confirmar). Chave = id do jogo.
-const SAMPLE_J1 = {
-  "A-1-0":[2,0], "A-1-1":[2,1],
-  "B-1-0":[1,1], "B-1-1":[1,1],
-  "C-1-0":[1,1], "C-1-1":[0,1],
-  "D-1-0":[4,1], "D-1-1":[0,2],
-  "E-1-0":[7,1], "E-1-1":[1,0],
-  "F-1-0":[2,2], "F-1-1":[5,1],
-  "G-1-0":[1,1], "G-1-1":[2,2],
-  "H-1-0":[0,0], "H-1-1":[1,1]
+// RESULTADOS REAIS já ocorridos até 23/jun/2026 (fonte: resumos de busca — VERIFICAR).
+// J1 completa (12 grupos) + J2 dos grupos A–J. K/L J2 (23/jun) ficam em branco.
+// Chave = id do jogo "<grupo>-<rodada>-<idxNoPar>". Placar = [gols mandante(pos par), gols visitante].
+const REAL_RESULTS = {
+  // Grupo A: MEX 2-0 RSA · KOR 2-1 CZE | MEX 1-0 KOR · CZE 1-1 RSA
+  "A-1-0":[2,0],"A-1-1":[2,1],"A-2-0":[1,0],"A-2-1":[1,1],
+  // Grupo B: CAN 1-1 BIH · QAT 1-1 SUI | CAN 6-0 QAT · SUI 4-1 BIH
+  "B-1-0":[1,1],"B-1-1":[1,1],"B-2-0":[6,0],"B-2-1":[4,1],
+  // Grupo C: BRA 1-1 MAR · HAI 0-1 SCO | BRA 3-0 HAI · SCO 0-1 MAR
+  "C-1-0":[1,1],"C-1-1":[0,1],"C-2-0":[3,0],"C-2-1":[0,1],
+  // Grupo D: USA 4-1 PAR · AUS 2-0 TUR | USA 2-0 AUS · TUR 0-1 PAR
+  "D-1-0":[4,1],"D-1-1":[2,0],"D-2-0":[2,0],"D-2-1":[0,1],
+  // Grupo E: GER 7-1 CUW · CIV 1-0 ECU | GER 2-1 CIV · ECU 0-0 CUW
+  "E-1-0":[7,1],"E-1-1":[1,0],"E-2-0":[2,1],"E-2-1":[0,0],
+  // Grupo F: NED 2-2 JPN · SWE 5-1 TUN | NED 5-1 SWE · TUN 0-4 JPN
+  "F-1-0":[2,2],"F-1-1":[5,1],"F-2-0":[5,1],"F-2-1":[0,4],
+  // Grupo G: BEL 1-1 EGY · IRN 2-2 NZL | BEL 0-0 IRN · NZL 1-3 EGY
+  "G-1-0":[1,1],"G-1-1":[2,2],"G-2-0":[0,0],"G-2-1":[1,3],
+  // Grupo H: ESP 0-0 CPV · KSA 1-1 URU | ESP 4-0 KSA · URU 2-2 CPV
+  "H-1-0":[0,0],"H-1-1":[1,1],"H-2-0":[4,0],"H-2-1":[2,2],
+  // Grupo I: FRA 3-1 SEN · IRQ 1-4 NOR | FRA 3-0 IRQ · NOR 3-2 SEN
+  "I-1-0":[3,1],"I-1-1":[1,4],"I-2-0":[3,0],"I-2-1":[3,2],
+  // Grupo J: ARG 3-0 ALG · AUT 3-1 JOR | ARG 2-0 AUT · JOR 1-2 ALG
+  "J-1-0":[3,0],"J-1-1":[3,1],"J-2-0":[2,0],"J-2-1":[1,2],
+  // Grupo K (só J1): POR 1-1 COD · UZB 1-3 COL
+  "K-1-0":[1,1],"K-1-1":[1,3],
+  // Grupo L (só J1): ENG 4-2 CRO · GHA 1-0 PAN
+  "L-1-0":[4,2],"L-1-1":[1,0]
 };
 
 /* ---------- 2. ESTADO + PERSISTÊNCIA ---------- */
@@ -396,10 +414,11 @@ function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }c
 function load(){
   try{
     const raw = localStorage.getItem(STORE_KEY);
-    if(!raw) return;
+    if(!raw){ state.scores = JSON.parse(JSON.stringify(REAL_RESULTS)); return; } // 1ª visita: pré-carrega resultados reais
     const o = JSON.parse(raw);
     if(o && o.ver === STORE_VER){ state = Object.assign(state,o); }
-  }catch(e){}
+    else { state.scores = JSON.parse(JSON.stringify(REAL_RESULTS)); }
+  }catch(e){ state.scores = JSON.parse(JSON.stringify(REAL_RESULTS)); }
 }
 
 /* ---------- 3. GERAÇÃO DE JOGOS DE GRUPO ---------- */
@@ -881,9 +900,10 @@ function bindControls(){
   $("#mcN").textContent=state.mcN;
   $("#mcSlider").addEventListener("input",e=>{ state.mcN=+e.target.value; $("#mcN").textContent=state.mcN; save(); });
   $("#btnSample").addEventListener("click",()=>{
-    for(const id in SAMPLE_J1){ state.scores[id]=SAMPLE_J1[id].slice(); }
+    if(!confirm("Recarregar os resultados reais (J1–J2)? Isto sobrescreve os placares atuais desses jogos.")) return;
+    for(const id in REAL_RESULTS){ state.scores[id]=REAL_RESULTS[id].slice(); }
     // refletir nos inputs sem recriar
-    for(const id in SAMPLE_J1){
+    for(const id in REAL_RESULTS){
       const div=$("#game-"+id); if(!div) continue;
       div.querySelectorAll("input.score").forEach(inp=>{ inp.value=state.scores[id][+inp.dataset.side]; });
       div.classList.add("done");
