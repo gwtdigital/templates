@@ -58,5 +58,13 @@ export async function createCompanyWithOwner(formData: FormData) {
     trial_ends_at: trialEndsAt.toISOString(),
   })
 
+  await admin.from('pipeline_stages').insert([
+    { company_id: company.id, name: 'Novo Lead', order: 1, color: '#3b82f6' },
+    { company_id: company.id, name: 'Qualificando', order: 2, color: '#8b5cf6' },
+    { company_id: company.id, name: 'Proposta', order: 3, color: '#f59e0b' },
+    { company_id: company.id, name: 'Negociação', order: 4, color: '#f97316' },
+    { company_id: company.id, name: 'Fechado', order: 5, color: '#22c55e' },
+  ])
+
   redirect('/master/nova-empresa?sucesso=1')
 }

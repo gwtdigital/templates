@@ -3,12 +3,15 @@ export type Profile = {
   full_name: string | null
   avatar_url: string | null
   role: string | null
+  company_id: string | null
+  onboarding_completed_at: string | null
   created_at: string
   updated_at: string
 }
 
 export type Channel = {
   id: string
+  company_id: string
   name: string
   type: 'whatsapp' | 'instagram' | 'email' | 'website' | string
   config: Record<string, unknown>
@@ -19,6 +22,7 @@ export type Channel = {
 
 export type Contact = {
   id: string
+  company_id: string
   name: string
   email: string | null
   phone: string | null
@@ -30,6 +34,7 @@ export type Contact = {
 
 export type Conversation = {
   id: string
+  company_id: string
   contact_id: string
   channel_id: string
   status: 'open' | 'resolved' | 'pending' | string
@@ -42,6 +47,7 @@ export type Conversation = {
 
 export type Message = {
   id: string
+  company_id: string
   conversation_id: string
   content: string
   direction: 'inbound' | 'outbound'
@@ -51,6 +57,7 @@ export type Message = {
 
 export type PipelineStage = {
   id: string
+  company_id: string
   name: string
   order: number
   color: string | null
@@ -59,6 +66,7 @@ export type PipelineStage = {
 
 export type Deal = {
   id: string
+  company_id: string
   contact_id: string
   stage_id: string
   title: string
@@ -69,6 +77,7 @@ export type Deal = {
 
 export type Note = {
   id: string
+  company_id: string
   contact_id: string | null
   conversation_id: string | null
   content: string
@@ -77,6 +86,7 @@ export type Note = {
 
 export type Tag = {
   id: string
+  company_id: string
   name: string
   color: string | null
 }
@@ -88,6 +98,7 @@ export type ContactTag = {
 
 export type CustomFieldDefinition = {
   id: string
+  company_id: string
   entity_type: string
   field_name: string
   field_type: string
