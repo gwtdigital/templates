@@ -4,8 +4,7 @@ import { brand } from '@/lib/brand'
 
 export const metadata: Metadata = {
   title: `${brand.name} — ${brand.tagline}`,
-  description:
-    'Zelo centraliza atendimento, CRM e agentes de IA treinados pro seu negócio — sem perder lead, sem aumentar sua equipe.',
+  description: `${brand.name} centraliza atendimento, CRM e agentes de IA treinados pro seu negócio — sem perder lead, sem aumentar sua equipe.`,
 }
 
 export const viewport: Viewport = {

@@ -1,5 +1,5 @@
 -- ============================================================
--- Zelo — Planos, empresas (multi-empresa) e assinaturas/trial
+-- SalesPro — Planos, empresas (multi-empresa) e assinaturas/trial
 -- Execute no SQL Editor do Supabase (dashboard → SQL Editor)
 -- ============================================================
 
