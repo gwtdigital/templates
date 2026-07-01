@@ -1,25 +1,32 @@
 @import "tailwindcss";
 
+/*
+ * Paleta derivada da marca (lib/brand.ts) — manter em sincronia:
+ *   primary    #32e0c4 -> 170.3 73.7% 53.7%
+ *   secondary  #222831 -> 216.0 18.1% 16.3%
+ *   surface    #393e46 -> 216.9 10.2% 24.9%
+ *   background #fafafa -> 0.0 0.0% 98.0%
+ */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 0 0% 98%;
+  --foreground: 216 18.1% 16.3%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 216 18.1% 16.3%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --popover-foreground: 216 18.1% 16.3%;
+  --primary: 170.3 73.7% 53.7%;
+  --primary-foreground: 216 18.1% 16.3%;
+  --secondary: 216.9 10.2% 24.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 210 20% 96.1%;
+  --muted-foreground: 216.9 10.2% 40%;
+  --accent: 170.3 73.7% 94%;
+  --accent-foreground: 216 18.1% 16.3%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --border: 216.9 15% 88%;
+  --input: 216.9 15% 88%;
+  --ring: 170.3 73.7% 53.7%;
   --radius: 0.5rem;
 }
 

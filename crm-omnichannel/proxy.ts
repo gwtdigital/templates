@@ -31,7 +31,7 @@ export async function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
   const rotasPublicas = ['/login', '/signup']
-  const ehRotaPublica = rotasPublicas.some((r) => pathname.startsWith(r))
+  const ehRotaPublica = pathname === '/' || rotasPublicas.some((r) => pathname.startsWith(r))
 
   if (!user && !ehRotaPublica) {
     const url = request.nextUrl.clone()

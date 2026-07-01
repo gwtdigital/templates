@@ -1,9 +1,15 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { brand } from '@/lib/brand'
 
 export const metadata: Metadata = {
-  title: 'CRM Omnichannel',
-  description: 'Plataforma de atendimento omnichannel',
+  title: `${brand.name} — ${brand.tagline}`,
+  description:
+    'Zelo centraliza atendimento, CRM e agentes de IA treinados pro seu negócio — sem perder lead, sem aumentar sua equipe.',
+}
+
+export const viewport: Viewport = {
+  themeColor: brand.primary,
 }
 
 export default function RootLayout({

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Inbox, Users, Kanban, LogOut } from 'lucide-react'
 import { logout } from '@/app/auth/actions'
 import { cn } from '@/lib/utils'
+import { brand } from '@/lib/brand'
 
 const itensNavegacao = [
   { href: '/inbox', label: 'Inbox', icone: Inbox },
@@ -22,7 +23,7 @@ export function Sidebar({ userEmail }: Props) {
   return (
     <aside className="flex w-60 flex-col border-r border-gray-200 bg-white">
       <div className="flex h-14 items-center border-b border-gray-200 px-4">
-        <span className="font-semibold text-gray-900">CRM</span>
+        <span className="font-semibold text-gray-900">{brand.name}</span>
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 p-2">
