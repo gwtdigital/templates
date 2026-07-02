@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Inbox, Users, Kanban, LogOut } from 'lucide-react'
+import { LayoutDashboard, Inbox, Users, Kanban, LogOut } from 'lucide-react'
 import { logout } from '@/app/auth/actions'
 import { cn } from '@/lib/utils'
 import { brand } from '@/lib/brand'
 
 const itensNavegacao = [
+  { href: '/dashboard', label: 'Dashboard', icone: LayoutDashboard },
   { href: '/inbox', label: 'Inbox', icone: Inbox },
   { href: '/contatos', label: 'Contatos', icone: Users },
   { href: '/pipeline', label: 'Pipeline', icone: Kanban },

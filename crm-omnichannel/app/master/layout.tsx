@@ -24,7 +24,7 @@ export default async function LayoutMaster({
     .single()
 
   if (profile?.role !== 'master') {
-    redirect('/inbox')
+    redirect('/dashboard')
   }
 
   return (

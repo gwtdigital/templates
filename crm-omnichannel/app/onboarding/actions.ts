@@ -43,5 +43,5 @@ export async function finishOnboarding() {
 
   await supabase.from('profiles').update({ onboarding_completed_at: new Date().toISOString() }).eq('id', user.id)
 
-  redirect('/inbox')
+  redirect('/dashboard')
 }

@@ -31,8 +31,8 @@ export default async function OnboardingPage({ searchParams }: Props) {
 
   // Sem empresa vinculada (ex.: cadastro self-service ou usuário Master) —
   // não há onboarding de trial pra fazer.
-  if (!profile?.company_id) redirect('/inbox')
-  if (profile.onboarding_completed_at) redirect('/inbox')
+  if (!profile?.company_id) redirect('/dashboard')
+  if (profile.onboarding_completed_at) redirect('/dashboard')
 
   const { data: company } = await supabase
     .from('companies')

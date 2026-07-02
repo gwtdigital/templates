@@ -41,7 +41,7 @@ export async function proxy(request: NextRequest) {
 
   if (user && ehRotaPublica) {
     const url = request.nextUrl.clone()
-    url.pathname = '/inbox'
+    url.pathname = '/dashboard'
     return NextResponse.redirect(url)
   }
 

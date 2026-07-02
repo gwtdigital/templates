@@ -20,7 +20,7 @@ export default async function LandingPage() {
   } = await supabase.auth.getUser()
 
   if (user) {
-    redirect('/inbox')
+    redirect('/dashboard')
   }
 
   const planos = await getActivePlans()

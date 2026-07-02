@@ -27,7 +27,7 @@ export default async function TrialExpiradoPage() {
 
   // Se o trial ainda está válido (ou já foi regularizado), não há motivo pra bloquear.
   if (!subscription || !isTrialExpired(subscription)) {
-    redirect('/inbox')
+    redirect('/dashboard')
   }
 
   const linkAssinar = subscription.checkout_url || brand.supportWhatsappUrl || '/master/nova-empresa'
