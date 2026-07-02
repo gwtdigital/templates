@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { MessageComposer } from '@/components/message-composer'
 import type { Conversation, Message } from '@/types/database'
 
 type Props = {
@@ -60,6 +61,8 @@ export function PainelMensagens({ conversa, mensagens }: Props) {
           ))
         )}
       </div>
+
+      <MessageComposer conversationId={conversa.id} />
     </div>
   )
 }
